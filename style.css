@@ -16,6 +16,31 @@ html{
     font-size: 16pt;
     color: var(--text-color);
 }
+@property --rotate{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+body{
+    background-image: conic-gradient(
+        from var(--rotate) at 50% -60%,
+        #0B1012 40%,
+        #f4f7fc23,
+        #0B1012 60%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: rotateLight 25s ease-in-out infinite alternate;
+}
+
+@keyframes rotateLight {
+    from{
+        --rotate:0.30turn
+    } to{
+        --rotate:-0.30turn;
+    }  
+}
 
 body::-webkit-scrollbar{
     width: 10px;
