@@ -31,7 +31,7 @@ body{
     );
     background-clip: text;
     -webkit-background-clip: text;
-    animation: rotateLight 25s ease-in-out infinite alternate;
+    animation: rotateLight 15s ease-in-out infinite alternate;
 }
 
 @keyframes rotateLight {
