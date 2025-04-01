@@ -1,0 +1,31 @@
+{
+    "name" : "TODO app",
+    "short_name": "TODO",
+    "start_url" : "./index.html",
+    "display" : "standalone",
+    "background_color" : "black",
+    "orientation" : "portrait",
+    "description" : "A simple TODO app",
+    "theme_color" : "#4db6ac",
+    "icons" : [
+        {
+            "src": "./assets/pic/to-do.png",
+            "sizes": "225x225",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "./assets/pic/desktop.png",
+            "sizes": "1894x870",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src" : "./asset/pic/phone.png",
+            "sizes":"225x225",
+            "type":"image/png",
+            "form_factor":"narrow"
+        }
+    ]
+}
