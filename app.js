@@ -21,7 +21,7 @@ function addTodo(){
         allTodos.push(todoObject);
         updateTodoList();
         saveTodos();
-        alert(todoText);
+        // alert(todoText);
     }else{
         alert("Your have to input a text before submission")
     }
