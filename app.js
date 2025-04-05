@@ -25,7 +25,7 @@ function addTodo(){
     }else{
         alert("Your have to input a text before submission")
     }
-   
+
 }
 function updateTodoList(){
     todoListUL.innerHTML = "";
@@ -33,6 +33,8 @@ function updateTodoList(){
         todoItem = createTodoItem(todo, todoIndex);
         todoListUL.append(todoItem);
     })
+
+    attachDragEvents();
 }
 function createTodoItem(todo, todoIndex){
     const todoId = "todo-" + todoIndex;
@@ -44,7 +46,7 @@ function createTodoItem(todo, todoIndex){
                 <label class="custom-checkbox" for="${todoId}">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="transparent"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
                 </label>
-                <label for="${todoId}" class="todo-text">
+                <label for="${todoId}" class="todo_text" draggable = "true">
                     ${todoText}
                 </label>
                 <button class="delete-button">
@@ -80,4 +82,55 @@ function saveTodos(){
 function getTodos(){
     const todos = localStorage.getItem("todos") || "[]";
     return JSON.parse(todos);
+}
+
+function attachDragEvents() {
+    const draggables = document.querySelectorAll('.todo_text');
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+            console.log('dragstart');
+          
+        });
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+            // Reorder the allTodos array based on the new order in the DOM
+            const newOrder = Array.from(todoListUL.querySelectorAll('.todo_text')).map(item => item.textContent.trim());
+            allTodos = newOrder.map(text => allTodos.find(todo => todo.text === text));
+            saveTodos();
+        });
+        if(draggable.classList.add('dragging')){
+            console.log('dragging');
+        }else if (draggable.classList.remove('dragging')){
+            console.log('dragend');
+            
+        } else {
+            draggable.style.cursor = 'pointer';
+        }
+    });
+
+    todoListUL.addEventListener('dragover', e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(todoListUL, e.clientY);
+        const draggable = document.querySelector('.dragging');
+        if (afterElement == null) {
+            todoListUL.appendChild(draggable.closest('.todo'));
+        } else {
+            todoListUL.insertBefore(draggable.closest('.todo'), afterElement);
+        }
+    });
+    console.log('dragover');
+}
+
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.todo:not(.dragging)')];
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
