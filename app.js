@@ -90,7 +90,6 @@ function attachDragEvents() {
         draggable.addEventListener('dragstart', () => {
             draggable.classList.add('dragging');
             console.log('dragstart');
-          
         });
         draggable.addEventListener('dragend', () => {
             draggable.classList.remove('dragging');
@@ -99,14 +98,14 @@ function attachDragEvents() {
             allTodos = newOrder.map(text => allTodos.find(todo => todo.text === text));
             saveTodos();
         });
-        if(draggable.classList.add('dragging')){
-            console.log('dragging');
-        }else if (draggable.classList.remove('dragging')){
-            console.log('dragend');
+        // if(draggable.classList.add('dragging')){
+        //     console.log('dragging');
+        // }else if (draggable.classList.remove('dragging')){
+        //     console.log('dragend');
             
-        } else {
-            draggable.style.cursor = 'pointer';
-        }
+        // } else {
+        //     draggable.style.cursor = 'pointer';
+        // }
     });
 
     todoListUL.addEventListener('dragover', e => {

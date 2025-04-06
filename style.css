@@ -144,7 +144,9 @@ form{
     flex-grow: 1;
     transition: 200ms ease;
 }
-
+.todo .todo_text:hover{
+    cursor: grab;
+}
 .todo_text.dragging{
     opacity: 1;
 }
